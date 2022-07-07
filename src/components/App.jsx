@@ -16,7 +16,7 @@ export class App extends Component {
   };
 
   addContact = (name, number) => {
-    if (this.state.name.toLowerCase() === name.toLowerCase()) {
+    if (this.state.contacts.find(contact => contact.name === name)) {
       alert(`${name} is already in contacts`);
       return;
     }
@@ -51,18 +51,21 @@ export class App extends Component {
 
   render() {
     const { filter } = this.state;
-    const filterContacts = this.getFilterContacts();
+    const contacts = this.getFilterContacts();
 
     return (
-      <div>
-        <h2>Phonebook</h2>
+      <div className="container">
+        <h2 className="container-name">Phonebook</h2>
         <ContactForm onSubmit={this.addContact} />
-      <div>
-      <h2>Contacts</h2>
-          <Filter changeFilter={this.changeFilter} filter={filter} />
-          <ContactList filterContacts={filterContacts} deleteContact={this.deleteContact} />
-          </div>
+        <div>
+          <h2 className="container-name">Contacts</h2>
+          <Filter value={filter} onChange={this.changeFilter} />
+          <ContactList
+            filterContacts={contacts}
+            deleteContact={this.deleteContact}
+          />
         </div>
+      </div>
     );
   }
 }
