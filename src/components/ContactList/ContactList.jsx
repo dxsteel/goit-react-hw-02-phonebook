@@ -8,9 +8,11 @@ const ContactList = ({ filterContacts, deleteContact }) => {
         return (
           <li key={id}>
             {name}: {number}
+            <div className={styles.position}>
             <button className={styles.button} onClick={() => deleteContact(id)}>
               Delete
-            </button>
+              </button>
+              </div>
           </li>
         );
       })}
